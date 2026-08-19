@@ -1,0 +1,72 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class FacultyCoordinator {
+  - staffId : String
+  - department : String
+  + verifyEligibility()
+  + approveProfile()
+}
+
+class Student {
+  - studentId : String
+  - name : String
+  - email : String
+  - password : String
+  - applicationId : String
+  - appliedDate : Date
+  - applicationStatus : String
+  + register()
+  + login()
+  + applyTo(r : Recruiter)
+  + viewApplicationStatus()
+}
+
+class TPOOfficer {
+  - staffId : String
+  - name : String
+  + publishOpportunity()
+  + updateApplicationStatus()
+}
+
+class Profile {
+  - cgpa : float
+  - branch : String
+  - resumeUrl : String
+  - backlogs : int
+  + update()
+}
+
+class Recruiter {
+  - recruiterId : String
+  - companyName : String
+  - contactEmail : String
+  - oppType : String
+  - title : String
+  - salary : float
+  - stipend : float
+  - durationMonths : int
+  - postedDate : Date
+  - deadline : Date
+  - minCGPA : float
+  - maxBacklogs : int
+  - eligibleBranches : String[]
+  + postOpportunity()
+  + isEligible(s : Student) : bool
+}
+
+class Notification {
+  - notificationId : String
+  - channel : String
+  - message : String
+  - sentAt : DateTime
+  + send()
+}
+
+FacultyCoordinator "1" -- "0..*" Student : verifies
+Student "1" -- "1" Profile : has
+Student "0..*" -- "0..*" Recruiter : applies to / receives application from
+TPOOfficer "1" -- "0..*" Recruiter : publishes on behalf of
+Student "1" -- "0..*" Notification : receives
+
+@enduml
