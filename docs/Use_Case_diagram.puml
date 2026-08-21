@@ -1,0 +1,64 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Define Primary Actors (Left Side)
+actor "Student\nPrimary Actor" as student
+actor "Recruiter\nCompany HR" as recruiter
+actor "TPO / Placement\nOfficer\nPrimary Actor" as tpo
+actor "Faculty Coordinator\nPrimary Actor" as faculty
+
+' Define External/Time-Triggered Actors (Right Side)
+actor "Email / SMS\nExternal Actor" as email
+actor "Scheduler\nTime-Triggered Actor" as scheduler
+
+' System Boundary
+rectangle "PLACEMENT TRACKER SYSTEM" {
+  usecase "UC1: Login / Register" as uc1
+  usecase "UC2: Update Student\nProfile" as uc2
+  usecase "UC3: View Job\nOpportunities" as uc3
+  usecase "UC4: Apply for Job" as uc4
+  usecase "UC5: View Application\nStatus" as uc5
+  usecase "UC6: Apply for\nInternship" as uc6
+  usecase "UC7: Check Eligibility\nCriteria (CGPA, etc.)" as uc7
+}
+
+' Primary Actor Associations
+student --> uc1
+student --> uc2
+student --> uc3
+student --> uc4
+student --> uc5
+student --> uc6
+
+recruiter --> uc1
+recruiter --> uc3
+recruiter --> uc5
+
+tpo --> uc1
+tpo --> uc3
+tpo --> uc5
+
+faculty --> uc1
+faculty --> uc3
+faculty --> uc5
+
+' External Actor Associations
+uc4 --> email
+uc5 --> email
+uc5 --> scheduler
+
+' <<include>> Relationships (Blue Dashed Lines)
+uc2 ..> uc1 : <<include>>
+uc3 ..> uc1 : <<include>>
+uc4 ..> uc1 : <<include>>
+uc5 ..> uc1 : <<include>>
+uc6 ..> uc1 : <<include>>
+
+uc4 ..> uc7 : <<include>>
+uc6 ..> uc7 : <<include>>
+
+' <<extend>> Relationships (Orange Dashed Lines)
+uc6 ..> uc4 : <<extend>>
+
+@enduml
