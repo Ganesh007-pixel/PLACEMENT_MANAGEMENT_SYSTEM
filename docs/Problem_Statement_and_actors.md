@@ -15,7 +15,7 @@ As a Faculty Coordinator, I want to log in and monitor the application status of
 The system should use an Email/SMS service to send notifications to students and recruiters about job applications and application status updates.
 A Scheduler should automatically update application status records at regular intervals without requiring a user to do it manually.
 Therefore, the Placement Tracker System will provide one common platform for students, recruiters, TPOs, and faculty coordinators to manage and track placement activities.
-It will make the placement process more organized, simple, and easy to track for everyone involved..
+It will make the placement process more organized, simple, and easy to track for everyone involved.
 
 
 ACTORS WHICH ARE INCLUDED IN OUR PROJECT
